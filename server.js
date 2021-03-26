@@ -1,21 +1,16 @@
-const mongoose = require("mongoose");
-const express = require("express");
+const mongoose = require('mongoose');
+const express = require('express');
 
 const PORT = 3000;
 
-const app = express();
-
 app.use(express.json());
-app.use(express.urlencoded({extended:true}));
-app.use(express.static(path.join(__dirname, 'public')));
-
-//Bring in mongoose.connect
-
-//Declare routes
-
-//Declare API routes
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.listen(PORT, () => {
-    console.log(`my app is running on ${PORT}`)
+    console.log(`HOLY COW YOU DID IT! ${PORT} BEING USED`);
 })
 
+//api routes
+//workout schema finished
+//db running
