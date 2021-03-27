@@ -12,9 +12,38 @@ router.post("/api/workouts", ({ body }, res) => {
     });
 });
 
-//getting workouts by ID
+router.put("/api/workouts/:id", (req, res) => {
+    workout
+      .findByIdAndUpdate(
+          req.params.id, 
+          {$push:{exercises: req.body}}
+      )
+      .then((dbWorkout) => {
+        res.json(dbWorkout);
+      })
+      .catch((err) => {
+        res.status(400).json(err);
+      });
+  });
 
-//look up .aggregate for mongoose to get this answer
+router.get("/api/workouts", (req, res) => {
+    workout
+      .aggregate([
+          {
+              $addFields: {
+                  totalDuration: {
+                      $sum: "$exercises.duration"
+                  }
+              }
+          }
+      ])
+      .then((dbWorkout) => {
+        res.json(dbWorkout);
+      })
+      .catch((err) => {
+        res.status(400).json(err);
+      });
+  });
 
 router.delete("/api/workouts", ({ body }, res) => {
   workout
@@ -26,3 +55,5 @@ router.delete("/api/workouts", ({ body }, res) => {
       res.json(400).json(err);
     });
 });
+
+module.exports = router;
