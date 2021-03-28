@@ -16,7 +16,7 @@ app.use(require("./routes/api"))
 app.use(require("./routes/html"))
 
 app.listen(PORT, () => {
-    console.log(`HOLY COW YOU DID IT! ${PORT} BEING USED`);
+    console.log(`Running on ${PORT}`);
 })
 
 
